@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Ben Lima | The Windows 98 Personal Website</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/98.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <!-- Scripts -->
+    <script src="js/draggable-window.js" defer></script>
+    <script src="js/window-controls.js" defer></script>
+    <div class="desktop">
+        <div class="window" id="taskbar">
+            <button style="height: 33px; margin-right: 2px;"><img style="vertical-align: middle;" src="images/start.png"> <span style="vertical-align: middle; font-size: 16px; font-weight: bold;">Start</span></button>
+            <div class="vertical-rule"></div>
+
+            <div class="active-tasks">
+                <!-- TODO: add active tasks as chips, keep as array in task-control.js -->
+            </div>
+
+            <div class="vertical-rule"></div>
+            <button id="time-display" class="active" style="height: 33px; margin-right: 2px; font-size: 14px;"></button>
+        </div>
+    </div>
+    
+    <script>
+        setInterval(function() {let date = new Date();let hours = date.getHours();let minutes = date.getMinutes();let ampm = hours >= 12 ? 'PM' : 'AM';hours = hours % 12;hours = hours ? hours : 12;minutes = minutes < 10 ? '0' + minutes : minutes;console.log(`${hours}:${minutes} ${ampm}`);document.getElementById("time-display").innerHTML = `${hours}:${minutes} ${ampm}`;}, 1000);
+        
+    </script>
+</body>
+
+</html>
