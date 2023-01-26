@@ -36,13 +36,31 @@ function showWindow(title, content, width, height) {
 
 // Maximize
 function addMaximizeWindow(e) {
+  console.log(e.target)
   let win = e.target.parentElement.parentElement.parentElement;
   let desktop_size = document.querySelector(".desktop").getBoundingClientRect();
+
+  win.dataset.width=win.style.width;
+  win.dataset.height=win.style.height;
+
   win.style.left = 0;
   win.style.top = 0;
   win.style.width = `${desktop_size.width-6}px`;
   win.style.height = `${desktop_size.height-6-38}px`;
-  e.target.remove()
+  e.target.ariaLabel = "Restore";
+  e.target.removeEventListener("click", addMaximizeWindow());
+  e.target.addEventListener("click", (e) => addRestoreWindow(e));
+}
+
+// Restore
+function addRestoreWindow(e) {
+  console.log("a")
+  let win = e.target.parentElement.parentElement.parentElement;
+  win.style.width = win.dataset.width;
+  win.style.height = win.dataset.height;
+  e.target.ariaLabel = "Maximize";
+  e.target.removeEventListener("click", addRestoreWindow);
+  e.target.addEventListener("click", (e) => addMaximizeWindow(e));
 }
 
 // Close
