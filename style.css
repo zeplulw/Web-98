@@ -1,5 +1,5 @@
 body {
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 * {
@@ -11,6 +11,7 @@ body {
 
 .window {
     position: absolute;
+    resize: both;
 }
 
 .window .title-bar,
@@ -38,6 +39,7 @@ button,
     display: flex;
     background-color: #C0C0C0;
     font-size: 11px;
+    z-index: 2;
 }
 
 .vertical-rule {
@@ -63,7 +65,12 @@ button,
     right: 7px;
     top: 5px;
     position: absolute;
-    text-align: center;
+    vertical-align: middle;
+}
+
+#time-display img {
+    margin-right: 8px;
+    vertical-align: middle;
 }
 
 #desktop-apps {
@@ -73,8 +80,7 @@ button,
 }
 
 .active-tasks {
-    width: calc(100% - 83px - 72px - 4px - 4px);
-    border: 1px solid red;
+    width: calc(100% - 83px - 97px - 4px - 4px);
 }
 
 #desktop-apps {
