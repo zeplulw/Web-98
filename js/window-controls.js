@@ -1,14 +1,18 @@
 let currentWindowId = 1;
 
-function showWindow(title, content, width, height) {
+function showWindow(icon, title, content, width, height) {
+  console.log(icon, title, content, width, height);
+  width = width || 300;
+  height = height || 300;
+  let top = window.innerHeight / 2 - height / 2;
+  let left = window.innerWidth / 2 - width / 2;
+
   let win = `<div id=${
     currentWindowId + 1
-  } class="window draggable" style="width: ${width}px; height: ${height}px">
+  } class="window draggable" style="width: ${width}px; height: ${height}px; top: ${top}px; left: ${left}px">
     <div class="title-bar">
       <div class="title-bar-text">${title}</div>
       <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
         <button aria-label="Close"></button>
       </div>
     </div>
@@ -19,57 +23,22 @@ function showWindow(title, content, width, height) {
   document.querySelector(".desktop").insertAdjacentHTML("beforeend", win);
 
   win = document.querySelector(".window:last-child");
-  active_tasks.push(win);
-  dragElement(win);
   win
     .querySelector('[aria-label="Close"]')
     .addEventListener("click", (e) => addCloseWindow(e));
-  win
-    .querySelector('[aria-label="Maximize"]')
-    .addEventListener("click", (e) => addMaximizeWindow(e));
+  dragElement(win);
   bringToFrontEvent(win);
-  console.log(active_tasks);
+  addTaskToTaskbar(icon, title, win);
   currentWindowId += 1;
 }
 
-// Minimize
-
-// Maximize
-function addMaximizeWindow(e) {
-  console.log(e.target)
-  let win = e.target.parentElement.parentElement.parentElement;
-  let desktop_size = document.querySelector(".desktop").getBoundingClientRect();
-
-  win.dataset.width=win.style.width;
-  win.dataset.height=win.style.height;
-
-  win.style.left = 0;
-  win.style.top = 0;
-  win.style.width = `${desktop_size.width-6}px`;
-  win.style.height = `${desktop_size.height-6-38}px`;
-  e.target.ariaLabel = "Restore";
-  e.target.removeEventListener("click", addMaximizeWindow());
-  e.target.addEventListener("click", (e) => addRestoreWindow(e));
-}
-
-// Restore
-function addRestoreWindow(e) {
-  console.log("a")
-  let win = e.target.parentElement.parentElement.parentElement;
-  win.style.width = win.dataset.width;
-  win.style.height = win.dataset.height;
-  e.target.ariaLabel = "Maximize";
-  e.target.removeEventListener("click", addRestoreWindow);
-  e.target.addEventListener("click", (e) => addMaximizeWindow(e));
-}
-
 // Close
-// Hardcoded parentElement scheme
 function addCloseWindow(e) {
   // remove from active_tasks by id
-  let id = e.target.parentElement.parentElement.parentElement.id;
+  let win = e.target.parentElement.parentElement.parentElement;
+  let id = win.id;
   active_tasks = active_tasks.filter((task) => task.id != id);
-  console.log(active_tasks);
+  removeTaskFromTaskbar(win);
 
   e.target.parentElement.parentElement.parentElement.remove();
 }
@@ -86,4 +55,15 @@ function bringToFrontEvent(e) {
       z_index += 1;
     }
   });
+}
+
+// Add task to taskbar
+function addTaskToTaskbar(icon, title, win) {
+  let task = `<div id="desktop-task-${win.id}" class="task"><img src="../${icon}"><span>${title}</span></div>`;
+  document.querySelector(".active-tasks").insertAdjacentHTML("beforeend", task);
+}
+
+// Remove task from taskbar
+function removeTaskFromTaskbar(win) {
+  document.querySelector(`#desktop-task-${win.id}`).remove();
 }

@@ -1,40 +1,75 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
     <title>Ben Lima | The Windows 98 Personal Website</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
-    <link href="https://unpkg.com/98.css" rel="stylesheet" type="text/css">
-</head>
+    <link href="https://unpkg.com/98.css" rel="stylesheet" type="text/css" />
+  </head>
 
-<body>
+  <body>
     <!-- JS -->
-    <script>let active_tasks = new Array(); let z_index = 1;</script>
+    <script>
+      let active_tasks = new Array();
+      let z_index = 1;
+    </script>
     <script src="js/draggable-window.js" defer></script>
     <script src="js/window-controls.js" defer></script>
     <script src="js/desktop-highlighting.js" defer></script>
-    
+    <script src="js/desktop-icons.js" defer></script>
+
     <div class="desktop">
-        <div id="highlighting" style="border: 1px dotted #5F3B1E; position: absolute;"></div>
-        <div id="taskbar" style="z-index: 2147483647">
-            <button onClick="showWindow('test', 'test', 300, 500)" style="height: 33px; margin-right: 2px;;"><img style="vertical-align: middle;" src="images/start.png"> <span style="vertical-align: middle; font-size: 16px; font-weight: bold;">Start</span></button>
-            <div class="vertical-rule"></div>
+      <div
+        id="highlighting"
+        style="border: 1px dotted #5f3b1e; position: absolute"
+      ></div>
+      <div id="taskbar" style="z-index: 2147483647">
+        <button style="height: 33px; margin-right: 2px ;">
+          <img style="vertical-align: middle" src="images/start.png" />
+          <span
+            style="vertical-align: middle; font-size: 16px; font-weight: bold"
+            >Start</span
+          >
+        </button>
+        <div class="vertical-rule"></div>
 
-            <div class="active-tasks">
-                <!-- TODO: add active tasks as chips, keep as array in task-control.js -->
-                v0.0.3A
-            </div>
-            <div id="time-display" class="active"></div>
+        <div class="active-tasks"></div>
+        <div id="time-display" class="active"></div>
+      </div>
+      <div id="desktop-apps">
+        <div
+          id="desktop-app-1"
+          class="desktop-app"
+          ondblclick="showWindow('images/profilepicture-32x32.png', 'About Me', '⚠️ Under Construction ⚠️')"
+        >
+          <img src="images/profilepicture-32x32.png" />
+          <span>About Me</span>
         </div>
-        <div id="desktop-apps"></div>
+        <div
+          id="desktop-app-2"
+          class="desktop-app"
+          ondblclick="showWindow('images/notepad-32x32.png', 'Previous Work', '⚠️ Under Construction ⚠️')"
+        >
+          <img src="images/notepad-32x32.png" />
+          <span>Previous Work</span>
+        </div>
+      </div>
     </div>
-    
-    <script>
-        setInterval(function() {let date = new Date();let hours = date.getHours();let minutes = date.getMinutes();let ampm = hours >= 12 ? 'PM' : 'AM';hours = hours % 12;hours = hours ? hours : 12;minutes = minutes < 10 ? '0' + minutes : minutes;document.getElementById("time-display").innerHTML = `<img src="images/task-scheduler.png">${hours}:${minutes} ${ampm}`;}, 1000);
-        
-    </script>
-</body>
 
+    <script>
+      setInterval(function () {
+        let date = new Date();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        document.getElementById(
+          "time-display"
+        ).innerHTML = `<img src="images/task-scheduler.png">${hours}:${minutes} ${ampm}`;
+      }, 1000);
+    </script>
+  </body>
 </html>
