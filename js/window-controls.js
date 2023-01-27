@@ -59,7 +59,7 @@ function bringToFrontEvent(e) {
 
 // Add task to taskbar
 function addTaskToTaskbar(icon, title, win) {
-  let task = `<div id="desktop-task-${win.id}" class="task"><img src="../${icon}"><span>${title}</span></div>`;
+  let task = `<div id="desktop-task-${win.id}" class="task"><img src="${icon}"><span>${title}</span></div>`;
   document.querySelector(".active-tasks").insertAdjacentHTML("beforeend", task);
 }
 
