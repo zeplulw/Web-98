@@ -24,17 +24,15 @@
         id="highlighting"
         style="border: 1px dotted #5f3b1e; position: absolute"
       ></div>
-      <div id="taskbar" style="z-index: 2147483647">
-        <button style="height: 33px; margin-right: 2px ;">
+      <div id="taskbar">
+        <button id="start">
           <img style="vertical-align: middle" src="images/start.png" />
-          <span
-            style="vertical-align: middle; font-size: 16px; font-weight: bold"
-            >Start</span
-          >
+          <span style="vertical-align: middle; font-weight: bold">Start</span>
         </button>
         <div class="vertical-rule"></div>
 
         <div class="active-tasks"></div>
+        <div class="vertical-rule"></div>
         <div id="time-display" class="active"></div>
       </div>
       <div id="desktop-apps">
@@ -49,7 +47,7 @@
         <div
           id="desktop-app-2"
           class="desktop-app"
-          ondblclick="showWindow('images/notepad-32x32.png', 'Previous Work', '⚠️ Under Construction ⚠️')"
+          ondblclick="showWindow('images/notepad-16x16.png', 'Previous Work - Notepad', '⚠️ Under Construction ⚠️')"
         >
           <img src="images/notepad-32x32.png" />
           <span>Previous Work</span>
@@ -68,7 +66,7 @@
         minutes = minutes < 10 ? "0" + minutes : minutes;
         document.getElementById(
           "time-display"
-        ).innerHTML = `<img src="images/task-scheduler.png">${hours}:${minutes} ${ampm}`;
+        ).innerHTML = `<img src="images/task-scheduler.png"><img src="images/audio-okay-16x16.png">${hours}:${minutes} ${ampm}`;
       }, 1000);
     </script>
   </body>
