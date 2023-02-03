@@ -71,7 +71,7 @@ button,
   padding-right: 8px;
   margin-right: 2px;
   right: 7px;
-  top: 3px;
+  top: 4px;
   position: absolute;
   vertical-align: middle;
 }
@@ -89,7 +89,7 @@ button,
 }
 
 .active-tasks {
-  width: calc(100% - 168px);
+  width: calc(100% - 166px);
 }
 
 #desktop-apps {
