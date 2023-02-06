@@ -17,7 +17,7 @@
     <script src="js/draggable-window.js" defer></script>
     <script src="js/window-controls.js" defer></script>
     <script src="js/desktop-highlighting.js" defer></script>
-    <script src="js/desktop-icons.js" defer></script>
+    <script src="js/set-time.js" defer></script>
 
     <div class="desktop">
       <div
@@ -25,21 +25,34 @@
         style="border: 1px dotted #5f3b1e; position: absolute"
       ></div>
       <div id="taskbar">
-        <button id="start">
+        <button id="start" title="Start">
           <img style="vertical-align: middle" src="images/start.png" />
           <span style="vertical-align: middle; font-weight: bold">Start</span>
         </button>
         <div class="vertical-rule"></div>
-
+        <div class="drag-bar"></div>
+        <div class="quick-access">
+          <img src="images/msie-32x32.png" title="Internet Explorer" onclick="triggerWindowFromDesktopId('desktop-app-4')" />
+          <img src="images/msdos-32x32.png" title="DOS Terminal" onclick="triggerWindowFromDesktopId('desktop-app-3')" />
+          <img src="images/profilepicture-32x32.png" title="About Me" onclick="triggerWindowFromDesktopId('desktop-app-1')" />
+          <img src="images/monitor-32x32.png" title="Monitors" onclick="triggerWindowFromDesktopId('desktop-app-5')" />
+        </div>
+        <div class="vertical-rule"></div>
+        <div class="drag-bar"></div>
         <div class="active-tasks"></div>
         <div class="vertical-rule"></div>
-        <div id="time-display" class="active"></div>
+        <div id="time-display" class="active" title="Current Time">
+          <img src="images/task-scheduler.png" title="Task Scheduler">
+          <img src="images/audio-okay-16x16.png" title="Audio">
+          <span id="time-display-text"></span>
+        </div>
       </div>
       <div id="desktop-apps">
         <div
           id="desktop-app-1"
           class="desktop-app"
-          ondblclick="showWindow('images/profilepicture-32x32.png', 'About Me', '⚠️ Under Construction ⚠️')"
+          ondblclick="showWindow('images/profilepicture-32x32.png', 'About Me', '<h5>Under construction, visit other attractions like Microsoft DOS, Internet Explorer, and Monitors</h5>')"
+          title="About Me"
         >
           <img src="images/profilepicture-32x32.png" />
           <span>About Me</span>
@@ -47,27 +60,50 @@
         <div
           id="desktop-app-2"
           class="desktop-app"
-          ondblclick="showWindow('images/notepad-16x16.png', 'Previous Work - Notepad', '⚠️ Under Construction ⚠️')"
+          ondblclick="showWindow('images/notepad-16x16.png', 'Previous Work - Notepad', '<h5>Under construction, visit other attractions like Microsoft DOS, Internet Explorer, and Monitors</h5>')"
+          title="Previous Work"
         >
           <img src="images/notepad-32x32.png" />
           <span>Previous Work</span>
+        </div>
+        <div
+          id="desktop-app-3"
+          class="desktop-app"
+          ondblclick="showWindow('images/msdos-32x32.png', 'Hacking At Hyper Speed - Microsoft DOS', '<iframe src=https://hackertyper.net/ width=600 height=450></iframe>', 620, 490)"
+          title="Microsoft DOS"
+        >
+          <img src="images/msdos-32x32.png" />
+          <span>Microsoft DOS</span>
+        </div>
+        <div
+          id="desktop-app-4"
+          class="desktop-app"
+          ondblclick="showWindow('images/msie-32x32.png', 'Ben Lima | The Windows 98 Personal Website - Internet Explorer', '<iframe src=https://zeplulw.github.io/Web-98 width=600 height=450></iframe>', 620, 490)"
+          title="Internet Explorer"
+        >
+          <img src="images/msie-32x32.png" />
+          <span>Internet Explorer</span>
+        </div>
+        <div
+          id="desktop-app-5"
+          class="desktop-app"
+          ondblclick="showWindow('images/question_mark-32x32.png', 'M̶o̶n̶i̶t̶o̶r̶s̶  Longcat Longcat Longcat Longcat Longcat Longcat', '<img src=images/longcat.jpg  height=400 width=400>', 415, 435)"
+          title="Monitors"
+        >
+          <img src="images/monitor-32x32.png" />
+          <span>Monitors</span>
         </div>
       </div>
     </div>
 
     <script>
-      setInterval(function () {
-        let date = new Date();
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let ampm = hours >= 12 ? "PM" : "AM";
-        hours = hours % 12;
-        hours = hours ? hours : 12;
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        document.getElementById(
-          "time-display"
-        ).innerHTML = `<img src="images/task-scheduler.png"><img src="images/audio-okay-16x16.png">${hours}:${minutes} ${ampm}`;
-      }, 1000);
+      // Load startup window
+      window.onload = (event) => {
+        if (!localStorage.getItem("seenIntro")) {
+          showWindow("images/msie-32x32.png", "Welcome To My Portfolio - Internet Explorer", "<p style=''>Started as a side project and still not quite finished yet, my 'emulator' of Windows 98 is meant to be a fun and informative experience.<br><br>Click around and don't be surprised if something doesn't respond -- it probably doesn't work :)</p>", 300, 110)
+          localStorage.setItem("seenIntro", true);
+        }
+      }
     </script>
   </body>
 </html>

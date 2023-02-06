@@ -7,17 +7,13 @@ body {
   padding: 0;
   image-rendering: pixelated;
   font-family: "Pixelated MS Sans Serif", Arial;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .window {
   position: absolute;
   resize: both;
-}
-
-.window .title-bar,
-button,
-#time-display {
-  user-select: none;
 }
 
 .desktop {
@@ -33,6 +29,7 @@ button,
   height: 27px;
   min-width: 0;
   padding: 0 8px 0 8px;
+  cursor: pointer;
 }
 
 #taskbar {
@@ -47,7 +44,7 @@ button,
   background-color: #c0c0c0;
   font-size: 11px;
   z-index: 2147483647;
-  box-shadow: inset 0 1px #ffffff;
+  box-shadow: inset 0 1px #fff;
 }
 
 .vertical-rule {
@@ -56,6 +53,11 @@ button,
   background-color: #fff;
   box-shadow: inset 1px 0 #808080;
   margin: 1px 2px 0 2px;
+}
+
+.vertical-rule:last-child {
+  position: absolute;
+  right: 150px;
 }
 
 .active {
@@ -80,6 +82,7 @@ button,
   margin-right: 2px;
   margin-top: 2px;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 #desktop-apps {
@@ -89,7 +92,8 @@ button,
 }
 
 .active-tasks {
-  width: calc(100% - 166px);
+  margin-left: 4px;
+  width: calc(100% - 290px);
 }
 
 #desktop-apps {
@@ -108,21 +112,30 @@ button,
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 96px;
-  height: 96px;
-  user-select: none;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  margin-bottom: 4px;
+  padding-bottom: 8px;
 }
 
 .desktop-app > img {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   margin-bottom: 4px;
   margin-top: 8px;
   -webkit-user-drag: none;
 }
 
+.desktop-app > span {
+  font-size: 11px;
+  max-width: 56px;
+  color: white;
+  text-align: center;
+}
+
 .desktop-app:active {
-  background-color: #0000801f;
+  background-color: #00008019;
 }
 
 .active-tasks {
@@ -139,7 +152,7 @@ button,
   justify-content: left;
   margin: 3px 4px 0 0;
   padding: 0 10px 0 4px;
-  width: auto;
+  min-width: 200px;
   max-width: 200px;
   height: 27px;
   box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey,
@@ -157,4 +170,27 @@ button,
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.quick-access {
+  width: 108px;
+  height: 27px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.quick-access > img {
+  height: 20px;
+  margin: 0 2px 0 2px;
+  cursor: pointer;
+}
+
+.drag-bar {
+  width: 3px;
+  height: 21px;
+  background-color: #dfdfdf;
+  box-shadow: inset -1px -1px #808080, inset 1px 1px #fff;
+  cursor: move;
 }

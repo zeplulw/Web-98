@@ -17,7 +17,7 @@ function showWindow(icon, title, content, width, height) {
       </div>
     </div>
     <div class="window-body">
-      <p>${content}</p>
+      ${content}
     </div>
   </div>`;
   document.querySelector(".desktop").insertAdjacentHTML("beforeend", win);
@@ -57,9 +57,15 @@ function bringToFrontEvent(e) {
   });
 }
 
+function bringToFront(id) {
+  let win = document.getElementById(id);
+  win.style.zIndex = z_index + 1;
+  z_index += 1;
+}
+
 // Add task to taskbar
 function addTaskToTaskbar(icon, title, win) {
-  let task = `<div id="desktop-task-${win.id}" class="task"><img src="${icon}"><span>${title}</span></div>`;
+  let task = `<div id="desktop-task-${win.id}" class="task" onclick=bringToFront(${win.id})><img src="${icon}"><span>${title}</span></div>`;
   document.querySelector(".active-tasks").insertAdjacentHTML("beforeend", task);
 }
 
@@ -67,3 +73,8 @@ function addTaskToTaskbar(icon, title, win) {
 function removeTaskFromTaskbar(win) {
   document.querySelector(`#desktop-task-${win.id}`).remove();
 }
+
+function triggerWindowFromDesktopId (id) {
+  // this is definitely not a vulnerability, shh
+  eval(document.querySelector(`#${id}`).getAttribute("ondblclick"))
+} 
